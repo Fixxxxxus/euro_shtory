@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,14 +19,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "20"
           cache: npm
+
       - run: npm ci
-      - run: npm run build
+
+      - name: Build Next.js (static export)
+        run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: /euro_shtory
+
+      - name: Verify export
+        run: test -f out/index.html && ls -lh out/index.html && ls -la out | head -15
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
@@ -37,5 +46,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
