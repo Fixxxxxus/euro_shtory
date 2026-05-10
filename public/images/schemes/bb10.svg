@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#0f1419"/>
+  <rect x="160" y="90" width="480" height="28" fill="#6b7c8f" rx="4"/>
+  <rect x="180" y="140" width="440" height="260" fill="none" stroke="#c9a962" stroke-width="2"/>
+  <text x="400" y="430" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">BB 10 / 15 — схема (PDF)</text>
+</svg>

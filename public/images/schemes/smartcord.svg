@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#10151c"/>
+  <rect x="180" y="80" width="440" height="32" fill="#8a7349" rx="4"/>
+  <line x1="620" y1="96" x2="620" y2="360" stroke="#f4efe6" stroke-width="3" stroke-dasharray="8 8"/>
+  <rect x="200" y="130" width="400" height="250" fill="none" stroke="#f4efe6" stroke-width="2"/>
+  <text x="400" y="430" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">SmartCord — схема (PDF)</text>
+</svg>

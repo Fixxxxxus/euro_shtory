@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#141b24"/>
+  <rect x="150" y="70" width="500" height="36" fill="#c9a962" rx="8"/>
+  <rect x="170" y="130" width="460" height="270" fill="none" stroke="#f4efe6" stroke-width="2"/>
+  <circle cx="400" cy="265" r="40" fill="#f4efe6" opacity="0.15"/>
+  <text x="400" y="430" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">LiteRise — схема (PDF)</text>
+</svg>

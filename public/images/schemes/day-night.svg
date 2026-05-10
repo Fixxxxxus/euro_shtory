@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#10151c"/>
+  <rect x="160" y="100" width="480" height="110" fill="none" stroke="#9aa4b2" stroke-width="2"/>
+  <rect x="160" y="230" width="480" height="110" fill="none" stroke="#c9a962" stroke-width="2"/>
+  <text x="400" y="390" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">День-ночь — две ткани (PDF)</text>
+</svg>

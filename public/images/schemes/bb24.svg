@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a3440"/>
+      <stop offset="100%" stop-color="#0f1419"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <rect x="120" y="60" width="560" height="40" fill="#c9a962" opacity="0.9" rx="6"/>
+  <rect x="140" y="120" width="520" height="260" fill="none" stroke="#f4efe6" stroke-width="2" opacity="0.85"/>
+  <path d="M160 380 V140 M640 380 V140" stroke="#f4efe6" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="440" text-anchor="middle" fill="#f4efe6" font-family="system-ui,sans-serif" font-size="22">BB 24 — схема (замените вырезкой из PDF)</text>
+</svg>

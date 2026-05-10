@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#121820"/>
+  <rect x="100" y="40" width="600" height="50" fill="#3d4a5c" rx="6"/>
+  <rect x="120" y="120" width="560" height="280" fill="none" stroke="#c9a962" stroke-width="2"/>
+  <text x="400" y="430" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">Плафонд PB/PR — схема (PDF)</text>
+</svg>

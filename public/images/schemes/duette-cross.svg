@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#0f1419"/>
+  <g opacity="0.9">
+    <path d="M200 120 L360 120 L360 360 L200 360 Z" fill="#2a3340" stroke="#c9a962"/>
+    <path d="M360 120 L520 120 L520 360 L360 360 Z" fill="#1e2630" stroke="#c9a962"/>
+    <path d="M240 160 h160 v40 h-160z" fill="#c9a962" opacity="0.25"/>
+    <path d="M240 220 h160 v40 h-160z" fill="#c9a962" opacity="0.18"/>
+    <path d="M240 280 h160 v40 h-160z" fill="#c9a962" opacity="0.12"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="20">Duette® — сэндвич-ячейка (PDF)</text>
+</svg>

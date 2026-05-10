@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#0f1419"/>
+  <rect x="220" y="200" width="360" height="120" fill="none" stroke="#c9a962" stroke-width="3"/>
+  <rect x="210" y="190" width="380" height="24" fill="#c9a962" opacity="0.85" rx="4"/>
+  <text x="400" y="360" text-anchor="middle" fill="#f4efe6" font-family="system-ui" font-size="18">Клеевое крепление — TruFit Glide (PDF)</text>
+</svg>

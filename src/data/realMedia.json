@@ -1,0 +1,7 @@
+{
+  "_comment": "Пути от корня сайта: всё лежит в папке public/. Пример: файл public/media/plisse.jpg → \"/media/plisse.jpg\". После правок перезапустите dev или сделайте npm run build.",
+  "heroPlisseImage": "",
+  "heroDuetteImage": "",
+  "showcase": [],
+  "projects": []
+}
