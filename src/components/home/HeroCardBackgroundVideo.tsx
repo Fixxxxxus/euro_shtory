@@ -10,9 +10,6 @@ type Props = {
   prefersReducedMotion: boolean;
 };
 
-/**
- * Фон карточки: видео на весь блок без растягивания (object-cover + object-center).
- */
 export function HeroCardBackgroundVideo({ src, className, ariaLabel, prefersReducedMotion }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const resolved = withBasePath(src);

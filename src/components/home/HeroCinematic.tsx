@@ -1,11 +1,10 @@
 "use client";
 
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   HERO_VIDEO_POSTER,
   HERO_VIDEO_URL,
-  HERO_VIDEO_VERTICAL_MODE,
   SITE,
 } from "@/lib/site";
 
@@ -15,28 +14,11 @@ const slides = [
   { id: 3, gradient: "from-brand-dark via-[#1a1a12] to-[#2a2218]", label: "Реальные объекты — в нашем Telegram" },
 ];
 
-type HeroVideoLayout = "portrait" | "landscape";
-
-function resolveLayoutFromVideo(el: HTMLVideoElement): HeroVideoLayout | null {
-  const w = el.videoWidth;
-  const h = el.videoHeight;
-  if (!w || !h) return null;
-  return h > w ? "portrait" : "landscape";
-}
-
 export function HeroCinematic() {
   const [i, setI] = useState(0);
   const reduce = usePrefersReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const layoutRaf = useRef<number | null>(null);
-  const layoutGen = useRef(0);
   const hasVideo = Boolean(HERO_VIDEO_URL);
-  /** В auto на мобилке до измерения ролик скрыт (без мигания). На md+ всегда горизонтальный full-bleed — см. классы md:. */
-  const [videoLayout, setVideoLayout] = useState<HeroVideoLayout>(() => {
-    if (HERO_VIDEO_VERTICAL_MODE === "on") return "portrait";
-    return "landscape";
-  });
-  const [heroVideoRevealed, setHeroVideoRevealed] = useState(() => HERO_VIDEO_VERTICAL_MODE !== "auto");
 
   useEffect(() => {
     if (reduce) return;
@@ -52,88 +34,15 @@ export function HeroCinematic() {
     });
   }, [hasVideo, reduce]);
 
-  const scheduleLayoutSync = useCallback(() => {
-    if (HERO_VIDEO_VERTICAL_MODE === "on") {
-      setVideoLayout("portrait");
-      setHeroVideoRevealed(true);
-      return;
-    }
-    if (HERO_VIDEO_VERTICAL_MODE === "off") {
-      setVideoLayout("landscape");
-      setHeroVideoRevealed(true);
-      return;
-    }
-    const gen = ++layoutGen.current;
-    if (layoutRaf.current != null) cancelAnimationFrame(layoutRaf.current);
-    layoutRaf.current = requestAnimationFrame(() => {
-      layoutRaf.current = requestAnimationFrame(() => {
-        layoutRaf.current = null;
-        if (gen !== layoutGen.current) return;
-        const el = videoRef.current;
-        if (!el) return;
-        const next = resolveLayoutFromVideo(el);
-        if (next) {
-          setVideoLayout(next);
-          setHeroVideoRevealed(true);
-        }
-      });
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!hasVideo || HERO_VIDEO_VERTICAL_MODE !== "auto") return;
-    scheduleLayoutSync();
-    const onWinResize = () => scheduleLayoutSync();
-    window.addEventListener("resize", onWinResize);
-    return () => {
-      window.removeEventListener("resize", onWinResize);
-      layoutGen.current += 1;
-      if (layoutRaf.current != null) {
-        cancelAnimationFrame(layoutRaf.current);
-        layoutRaf.current = null;
-      }
-    };
-  }, [hasVideo, scheduleLayoutSync]);
-
-  useEffect(() => {
-    if (!hasVideo || HERO_VIDEO_VERTICAL_MODE !== "auto") return;
-    const t = window.setTimeout(() => {
-      const el = videoRef.current;
-      const next = el ? resolveLayoutFromVideo(el) : null;
-      setVideoLayout((prev) => (next ?? prev));
-      setHeroVideoRevealed(true);
-    }, 2500);
-    return () => window.clearTimeout(t);
-  }, [hasVideo]);
-
-  const onVideoReady = useCallback(() => {
-    scheduleLayoutSync();
-  }, [scheduleLayoutSync]);
-
-  const displayLayout =
-    !heroVideoRevealed && HERO_VIDEO_VERTICAL_MODE === "auto" ? "landscape" : videoLayout;
-
   return (
-    <section className="relative -mt-[73px] h-[min(100svh,900px)] overflow-hidden pt-[73px]">
+    <section className="relative -mt-[73px] h-[100dvh] min-h-[100svh] overflow-hidden pt-[73px] md:h-[min(100svh,900px)] md:min-h-0">
       {hasVideo && (
         <div className="absolute inset-0 bg-[#080a0c]">
-          <div
-            className={
-              displayLayout === "portrait"
-                ? "flex h-full w-full items-center justify-center md:relative md:block md:h-full md:w-full"
-                : "relative h-full w-full"
-            }
-          >
+          <div className="relative h-full min-h-0 w-full">
             <video
               key={HERO_VIDEO_URL}
               ref={videoRef}
-              className={
-                (displayLayout === "portrait"
-                  ? "max-h-full w-auto max-w-full object-contain object-center max-md:max-h-[min(100%,92svh)] md:h-full md:w-full md:max-w-none md:max-h-none md:object-cover md:object-center"
-                  : "h-full w-full object-cover object-center") +
-                (heroVideoRevealed ? " opacity-100" : " opacity-0 md:opacity-100") +
-                " transition-opacity duration-300 ease-out"
-              }
+              className="absolute inset-0 h-full w-full object-cover object-center"
               src={HERO_VIDEO_URL}
               poster={HERO_VIDEO_POSTER || undefined}
               muted
@@ -141,9 +50,6 @@ export function HeroCinematic() {
               playsInline
               autoPlay={!reduce}
               preload="metadata"
-              onLoadedMetadata={onVideoReady}
-              onLoadedData={onVideoReady}
-              onCanPlay={onVideoReady}
               aria-hidden
             />
           </div>

@@ -56,7 +56,7 @@ export function LazyImage({
           onLoadingComplete={() => setLoaded(true)}
         />
       ) : (
-        <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-white/5 via-white/10 to-white/5 bg-[length:200%_100%]" />
+        <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-white/[0.03] via-white/[0.06] to-white/[0.03] bg-[length:200%_100%]" />
       )}
     </div>
   );

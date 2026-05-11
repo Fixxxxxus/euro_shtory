@@ -41,11 +41,11 @@ export function HeroDualExpand() {
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-dark/90 via-brand-dark/40 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 md:p-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-brand-accent/90">Коллекция</p>
-              <h3 className="mt-2 font-display text-2xl font-semibold text-white md:text-4xl">Плиссе (20 / 32 мм)</h3>
-              <p className="mt-2 max-w-md text-sm text-brand-cream/75 md:text-base">Одна гармошка, широкая палитра тканей и систем под любой проём.</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-brand-accent/90">20 / 32 мм</p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-white md:text-4xl">Плиссе</h3>
+              <p className="mt-2 max-w-md text-sm text-brand-cream/75 md:text-base">Одна гармошка, куча тканей и креплений — от прямоугольника до нестандарта.</p>
               <span className="mt-4 inline-flex text-sm font-medium text-brand-accent md:opacity-0 md:transition md:group-hover:opacity-100">
-                Подробнее о плиссе →
+                Раздел плиссе →
               </span>
             </div>
           </Link>
@@ -66,19 +66,19 @@ export function HeroDualExpand() {
             />
             <div className="absolute inset-0 bg-gradient-to-tl from-brand-dark/90 via-brand-dark/40 to-transparent" />
             <div className="absolute bottom-0 right-0 p-6 text-right md:p-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-brand-accent/90">Коллекция</p>
-              <h3 className="mt-2 font-display text-2xl font-semibold text-white md:text-4xl">Duette® (25 / 32 / 64 мм)</h3>
+              <p className="text-xs uppercase tracking-[0.2em] text-brand-accent/90">25 / 32 / 64 мм</p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-white md:text-4xl">Duette®</h3>
               <p className="mt-2 ml-auto max-w-md text-sm text-brand-cream/75 md:text-base">
-                Двойная сэндвич-ткань: тепло, тишина, полотно без сквозных отверстий.
+                Сэндвич-ткань: теплее у стекла, тише с улицы, без дырок насквозь.
               </p>
               <span className="mt-4 inline-flex text-sm font-medium text-brand-accent md:opacity-0 md:transition md:group-hover:opacity-100">
-                Подробнее о Duette® →
+                Про Duette® →
               </span>
             </div>
           </Link>
         </div>
       </div>
-      <p className="mt-3 text-center text-xs text-brand-cream/45 md:hidden">Нажмите карточку, чтобы открыть раздел. На десктопе карточка плавно занимает ~75% ряда при наведении.</p>
+      <p className="mt-3 text-center text-xs text-brand-cream/45 md:hidden">Тап по карточке — в раздел. На большом экране при наведении карточка разъезжается шире.</p>
     </div>
   );
 }

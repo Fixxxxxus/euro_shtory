@@ -28,16 +28,16 @@ export function SiteFooter() {
           <a className="text-brand-cream/80 hover:text-white" href={SITE.whatsapp} target="_blank" rel="noreferrer">
             WhatsApp
           </a>
-          <Link
-            href="/contacts/"
+          <a
+            href={`tel:${SITE.phoneTel}`}
             className="mt-2 inline-flex w-fit items-center justify-center rounded-full bg-brand-accent px-5 py-2 text-sm font-medium text-brand-dark transition hover:brightness-110"
           >
             Связаться
-          </Link>
+          </a>
         </div>
       </div>
       <div className="border-t border-white/5 py-4 text-center text-xs text-brand-cream/40">
-        © {new Date().getFullYear()} {SITE.name}. Системы плиссе и Duette®.
+        © {new Date().getFullYear()} {SITE.name}
       </div>
     </footer>
   );

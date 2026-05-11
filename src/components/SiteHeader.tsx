@@ -17,7 +17,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-dark/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-dark/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
         <Link href="/" className="font-display text-lg font-semibold tracking-tight text-white md:text-xl">
           {SITE.name}
@@ -32,12 +32,12 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          <Link
-            href="/contacts/"
-            className="ml-2 rounded-full border border-brand-accent/50 px-4 py-2 text-xs font-medium uppercase tracking-wider text-brand-accent transition hover:bg-brand-accent/10"
+          <a
+            href={`tel:${SITE.phoneTel}`}
+            className="ml-2 rounded-full border border-brand-accent/45 px-4 py-2 text-sm font-medium text-brand-accent transition hover:bg-brand-accent/10"
           >
             Связаться
-          </Link>
+          </a>
         </nav>
         <MobileNav pathname={pathname} />
       </div>
@@ -61,9 +61,9 @@ function MobileNav({ pathname }: { pathname: string }) {
             {l.label}
           </Link>
         ))}
-        <Link href="/contacts/" className="mt-1 block rounded-lg px-3 py-2 text-sm text-brand-accent hover:bg-white/5">
+        <a href={`tel:${SITE.phoneTel}`} className="mt-1 block rounded-lg px-3 py-2 text-sm text-brand-accent hover:bg-white/5">
           Связаться
-        </Link>
+        </a>
       </div>
     </details>
   );

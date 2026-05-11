@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 
-/** Раньше здесь был motion.main с opacity — оставляем простой main, контент всегда виден. */
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 

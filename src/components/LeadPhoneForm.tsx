@@ -16,8 +16,8 @@ export function LeadPhoneForm({ className = "" }: { className?: string }) {
 
   return (
     <form onSubmit={submit} className={`glass rounded-2xl p-6 md:p-8 ${className}`}>
-      <h3 className="font-display text-xl font-semibold text-white md:text-2xl">Нужна консультация?</h3>
-      <p className="mt-2 text-sm text-brand-cream/70">Оставьте телефон — откроем Telegram с готовым текстом сообщения.</p>
+      <h3 className="font-display text-xl font-semibold text-white md:text-2xl">Остались вопросы?</h3>
+      <p className="mt-2 text-sm text-brand-cream/70">Напишите номер — откроется Telegram с черновиком, поправьте текст и отправьте.</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
         <input
           type="tel"
@@ -34,7 +34,7 @@ export function LeadPhoneForm({ className = "" }: { className?: string }) {
           Отправить в Telegram
         </button>
       </div>
-      {sent && <p className="mt-3 text-xs text-brand-accent/90">Если окно не открылось, позвоните: {SITE.phoneDisplay}</p>}
+      {sent && <p className="mt-3 text-xs text-brand-accent/90">Не вылезло окно — звоните: {SITE.phoneDisplay}</p>}
     </form>
   );
 }

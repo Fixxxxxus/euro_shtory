@@ -28,9 +28,9 @@ body {
 }
 
 .glass {
-  @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+  @apply border border-white/[0.07] bg-white/[0.035] backdrop-blur-md;
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-brand-cream via-brand-accent to-amber-200/90 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-brand-cream from-[-8%] via-[#dfd5c4] to-brand-accent/90 bg-clip-text text-transparent;
 }

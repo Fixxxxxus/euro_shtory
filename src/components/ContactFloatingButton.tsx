@@ -26,28 +26,25 @@ export function ContactFloatingButton() {
         <div className="glass flex flex-col gap-2 rounded-2xl p-3 shadow-2xl">
           <a
             href={`tel:${SITE.phoneTel}`}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
+            className="rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
           >
-            <span className="text-lg">📞</span>
-            <span>Звонок</span>
+            Позвонить
           </a>
           <a
             href={SITE.whatsapp}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
+            className="rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
           >
-            <span className="text-lg">💬</span>
-            <span>WhatsApp</span>
+            WhatsApp
           </a>
           <a
             href={SITE.telegram}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
+            className="rounded-xl px-4 py-3 text-sm text-white transition hover:bg-white/10"
           >
-            <span className="text-lg">✈️</span>
-            <span>Telegram</span>
+            Telegram
           </a>
         </div>
       ) : null}
@@ -56,7 +53,7 @@ export function ContactFloatingButton() {
         onClick={() => setOpen((v) => !v)}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-brand-dark shadow-lg shadow-brand-accent/30 transition hover:scale-105 hover:brightness-110 active:scale-95"
         aria-expanded={open}
-        aria-label="Связаться"
+        aria-label="Контакты"
       >
         <ChatBubbleIcon className="h-7 w-7" />
       </button>

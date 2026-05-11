@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${display.variable} ${inter.variable}`} style={{ backgroundColor: "#0f1419" }}>
       <body className="min-h-screen font-sans">
-        {/* Если /_next/static/css не загрузился (404, другой порт) — не белый экран */}
+        {/* inline fallback если CSS с другого порта не подтянулся */}
         <style
           dangerouslySetInnerHTML={{
             __html: [

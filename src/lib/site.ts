@@ -66,7 +66,6 @@ export function waLink(body: string): string {
   return `${base}?text=${messengerBody(body)}`;
 }
 
-/** Ссылка на чат/контакт Telegram с предзаполненным текстом (t.me/...?text=). */
 export function telegramTextLink(body: string): string {
   const base = SITE.telegram.split("?")[0] ?? SITE.telegram;
   return `${base}?text=${messengerBody(body)}`;
