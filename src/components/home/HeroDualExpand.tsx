@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MediaFillImage } from "@/components/MediaFillImage";
+import { HeroCardBackgroundVideo } from "@/components/home/HeroCardBackgroundVideo";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { getHeroDuetteImage, getHeroPlisseImage } from "@/data/realMedia";
+
+const HERO_PLISSE_VIDEO = "/videos/hero-plisse.mp4";
+const HERO_DUETTE_VIDEO = "/videos/hero-duette.mp4";
 
 export function HeroDualExpand() {
   const [side, setSide] = useState<"left" | "right" | null>(null);
@@ -31,12 +33,11 @@ export function HeroDualExpand() {
           onMouseLeave={() => setSide(null)}
         >
           <Link href="/plisse/" className="group absolute inset-0 block">
-            <MediaFillImage
-              src={getHeroPlisseImage()}
-              alt="Плиссе"
+            <HeroCardBackgroundVideo
+              src={HERO_PLISSE_VIDEO}
+              ariaLabel="Плиссе — видео"
+              prefersReducedMotion={reduce}
               className={`transition duration-500 ${side === "right" ? "scale-105 blur-sm brightness-75" : "scale-100"}`}
-              sizes="(max-width:768px) 100vw, 50vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-dark/90 via-brand-dark/40 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 md:p-8">
@@ -57,12 +58,11 @@ export function HeroDualExpand() {
           onMouseLeave={() => setSide(null)}
         >
           <Link href="/duette/" className="group absolute inset-0 block">
-            <MediaFillImage
-              src={getHeroDuetteImage()}
-              alt="Duette"
+            <HeroCardBackgroundVideo
+              src={HERO_DUETTE_VIDEO}
+              ariaLabel="Duette — видео"
+              prefersReducedMotion={reduce}
               className={`transition duration-500 ${side === "left" ? "scale-105 blur-sm brightness-75" : "scale-100"}`}
-              sizes="(max-width:768px) 100vw, 50vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-tl from-brand-dark/90 via-brand-dark/40 to-transparent" />
             <div className="absolute bottom-0 right-0 p-6 text-right md:p-8">

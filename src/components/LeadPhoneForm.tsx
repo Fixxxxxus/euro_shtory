@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SITE, waLink } from "@/lib/site";
+import { SITE, telegramTextLink } from "@/lib/site";
 
 export function LeadPhoneForm({ className = "" }: { className?: string }) {
   const [phone, setPhone] = useState("");
@@ -10,14 +10,14 @@ export function LeadPhoneForm({ className = "" }: { className?: string }) {
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const body = `Здравствуйте! Прошу перезвонить: ${phone || "номер не указан"}. Интересуют системы EUROSHTHORY.`;
-    window.open(waLink(body), "_blank", "noopener,noreferrer");
+    window.open(telegramTextLink(body), "_blank", "noopener,noreferrer");
     setSent(true);
   }
 
   return (
     <form onSubmit={submit} className={`glass rounded-2xl p-6 md:p-8 ${className}`}>
       <h3 className="font-display text-xl font-semibold text-white md:text-2xl">Нужна консультация?</h3>
-      <p className="mt-2 text-sm text-brand-cream/70">Оставьте телефон — откроем WhatsApp с готовым текстом. Или напишите в Telegram.</p>
+      <p className="mt-2 text-sm text-brand-cream/70">Оставьте телефон — откроем Telegram с готовым текстом сообщения.</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
         <input
           type="tel"
@@ -31,7 +31,7 @@ export function LeadPhoneForm({ className = "" }: { className?: string }) {
           type="submit"
           className="rounded-xl bg-brand-accent px-6 py-3 text-sm font-semibold text-brand-dark transition hover:brightness-110"
         >
-          Отправить в WhatsApp
+          Отправить в Telegram
         </button>
       </div>
       {sent && <p className="mt-3 text-xs text-brand-accent/90">Если окно не открылось, позвоните: {SITE.phoneDisplay}</p>}

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   HERO_VIDEO_POSTER,
   HERO_VIDEO_URL,
@@ -15,22 +15,28 @@ const slides = [
   { id: 3, gradient: "from-brand-dark via-[#1a1a12] to-[#2a2218]", label: "Реальные объекты — в нашем Telegram" },
 ];
 
-type HeroVideoLayout = "portrait" | "landscape" | "pending";
+type HeroVideoLayout = "portrait" | "landscape";
 
-function resolveLayoutFromVideo(el: HTMLVideoElement): HeroVideoLayout {
-  return el.videoHeight > el.videoWidth ? "portrait" : "landscape";
+function resolveLayoutFromVideo(el: HTMLVideoElement): HeroVideoLayout | null {
+  const w = el.videoWidth;
+  const h = el.videoHeight;
+  if (!w || !h) return null;
+  return h > w ? "portrait" : "landscape";
 }
 
 export function HeroCinematic() {
   const [i, setI] = useState(0);
   const reduce = usePrefersReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const layoutRaf = useRef<number | null>(null);
+  const layoutGen = useRef(0);
   const hasVideo = Boolean(HERO_VIDEO_URL);
+  /** В auto на мобилке до измерения ролик скрыт (без мигания). На md+ всегда горизонтальный full-bleed — см. классы md:. */
   const [videoLayout, setVideoLayout] = useState<HeroVideoLayout>(() => {
     if (HERO_VIDEO_VERTICAL_MODE === "on") return "portrait";
-    if (HERO_VIDEO_VERTICAL_MODE === "off") return "landscape";
-    return "pending";
+    return "landscape";
   });
+  const [heroVideoRevealed, setHeroVideoRevealed] = useState(() => HERO_VIDEO_VERTICAL_MODE !== "auto");
 
   useEffect(() => {
     if (reduce) return;
@@ -46,19 +52,66 @@ export function HeroCinematic() {
     });
   }, [hasVideo, reduce]);
 
-  const onVideoMetadata = () => {
-    const el = videoRef.current;
-    if (!el || !hasVideo) return;
+  const scheduleLayoutSync = useCallback(() => {
     if (HERO_VIDEO_VERTICAL_MODE === "on") {
       setVideoLayout("portrait");
+      setHeroVideoRevealed(true);
       return;
     }
     if (HERO_VIDEO_VERTICAL_MODE === "off") {
       setVideoLayout("landscape");
+      setHeroVideoRevealed(true);
       return;
     }
-    setVideoLayout(resolveLayoutFromVideo(el));
-  };
+    const gen = ++layoutGen.current;
+    if (layoutRaf.current != null) cancelAnimationFrame(layoutRaf.current);
+    layoutRaf.current = requestAnimationFrame(() => {
+      layoutRaf.current = requestAnimationFrame(() => {
+        layoutRaf.current = null;
+        if (gen !== layoutGen.current) return;
+        const el = videoRef.current;
+        if (!el) return;
+        const next = resolveLayoutFromVideo(el);
+        if (next) {
+          setVideoLayout(next);
+          setHeroVideoRevealed(true);
+        }
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!hasVideo || HERO_VIDEO_VERTICAL_MODE !== "auto") return;
+    scheduleLayoutSync();
+    const onWinResize = () => scheduleLayoutSync();
+    window.addEventListener("resize", onWinResize);
+    return () => {
+      window.removeEventListener("resize", onWinResize);
+      layoutGen.current += 1;
+      if (layoutRaf.current != null) {
+        cancelAnimationFrame(layoutRaf.current);
+        layoutRaf.current = null;
+      }
+    };
+  }, [hasVideo, scheduleLayoutSync]);
+
+  useEffect(() => {
+    if (!hasVideo || HERO_VIDEO_VERTICAL_MODE !== "auto") return;
+    const t = window.setTimeout(() => {
+      const el = videoRef.current;
+      const next = el ? resolveLayoutFromVideo(el) : null;
+      setVideoLayout((prev) => (next ?? prev));
+      setHeroVideoRevealed(true);
+    }, 2500);
+    return () => window.clearTimeout(t);
+  }, [hasVideo]);
+
+  const onVideoReady = useCallback(() => {
+    scheduleLayoutSync();
+  }, [scheduleLayoutSync]);
+
+  const displayLayout =
+    !heroVideoRevealed && HERO_VIDEO_VERTICAL_MODE === "auto" ? "landscape" : videoLayout;
 
   return (
     <section className="relative -mt-[73px] h-[min(100svh,900px)] overflow-hidden pt-[73px]">
@@ -66,8 +119,8 @@ export function HeroCinematic() {
         <div className="absolute inset-0 bg-[#080a0c]">
           <div
             className={
-              videoLayout === "portrait"
-                ? "flex h-full w-full items-center justify-center"
+              displayLayout === "portrait"
+                ? "flex h-full w-full items-center justify-center md:relative md:block md:h-full md:w-full"
                 : "relative h-full w-full"
             }
           >
@@ -75,9 +128,11 @@ export function HeroCinematic() {
               key={HERO_VIDEO_URL}
               ref={videoRef}
               className={
-                videoLayout === "portrait"
-                  ? "max-h-full w-auto max-w-full object-contain object-center md:max-h-[min(100%,92svh)]"
-                  : "h-full w-full object-cover object-center"
+                (displayLayout === "portrait"
+                  ? "max-h-full w-auto max-w-full object-contain object-center max-md:max-h-[min(100%,92svh)] md:h-full md:w-full md:max-w-none md:max-h-none md:object-cover md:object-center"
+                  : "h-full w-full object-cover object-center") +
+                (heroVideoRevealed ? " opacity-100" : " opacity-0 md:opacity-100") +
+                " transition-opacity duration-300 ease-out"
               }
               src={HERO_VIDEO_URL}
               poster={HERO_VIDEO_POSTER || undefined}
@@ -86,7 +141,9 @@ export function HeroCinematic() {
               playsInline
               autoPlay={!reduce}
               preload="metadata"
-              onLoadedMetadata={onVideoMetadata}
+              onLoadedMetadata={onVideoReady}
+              onLoadedData={onVideoReady}
+              onCanPlay={onVideoReady}
               aria-hidden
             />
           </div>

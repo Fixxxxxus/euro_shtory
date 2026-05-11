@@ -5,7 +5,7 @@ import { TelegramShowcase } from "@/components/home/TelegramShowcase";
 import { BenefitsGrid } from "@/components/home/BenefitsGrid";
 import { WhySection } from "@/components/home/WhySection";
 import { LeadPhoneForm } from "@/components/LeadPhoneForm";
-import { SITE, waLink } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
 export default function HomePage() {
   return (
@@ -25,9 +25,6 @@ export default function HomePage() {
           </a>
           <a href={SITE.telegram} target="_blank" rel="noreferrer" className="rounded-full border border-brand-accent/40 px-5 py-2 text-sm text-brand-accent hover:bg-brand-accent/10">
             Telegram
-          </a>
-          <a href={waLink("Здравствуйте! Хочу консультацию по плиссе / Duette®.")} target="_blank" rel="noreferrer" className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-brand-dark hover:brightness-110">
-            WhatsApp
           </a>
           <Link href="/catalog/" className="rounded-full border border-white/15 px-5 py-2 text-sm text-brand-cream/85 hover:text-white">
             Открыть каталог
