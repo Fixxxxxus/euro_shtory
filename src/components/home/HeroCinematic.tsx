@@ -35,7 +35,7 @@ export function HeroCinematic() {
   }, [hasVideo, reduce]);
 
   return (
-    <section className="relative -mt-[73px] h-[100dvh] min-h-[100svh] overflow-hidden pt-[73px] md:h-[min(100svh,900px)] md:min-h-0">
+    <section className="relative -mt-[73px] h-[100svh] overflow-hidden pt-[73px] md:h-[min(100svh,900px)]">
       {hasVideo && (
         <div className="absolute inset-0 bg-[#080a0c]">
           <div className="relative h-full min-h-0 w-full">
@@ -74,21 +74,25 @@ export function HeroCinematic() {
         <h1 className="max-w-4xl font-display text-4xl font-semibold leading-tight text-white md:text-6xl lg:text-7xl">
           <span className="text-gradient">{SITE.tagline}</span>
         </h1>
-        <p
-          className={
-            hasVideo && slides[i].id === 3
-              ? "mt-6 max-w-none text-sm text-brand-cream/75 md:text-base whitespace-nowrap overflow-x-auto overflow-y-visible pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "mt-6 max-w-xl text-sm text-brand-cream/75 md:text-base"
-          }
-        >
+        <p className="mt-6 max-w-xl text-sm text-brand-cream/75 md:text-base">
           {hasVideo ? (
-            <>
-              {slides[i].label}. Ещё кадры — в{" "}
-              <a className="text-brand-accent underline-offset-4 hover:underline" href={SITE.telegramChannel} target="_blank" rel="noreferrer">
-                Telegram-канале
-              </a>
-              .
-            </>
+            slides[i].id === 3 ? (
+              <>
+                Реальные объекты — в нашем{" "}
+                <a className="text-brand-accent underline-offset-4 hover:underline" href={SITE.telegramChannel} target="_blank" rel="noreferrer">
+                  Telegram
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                {slides[i].label}. Ещё кадры — в{" "}
+                <a className="text-brand-accent underline-offset-4 hover:underline" href={SITE.telegramChannel} target="_blank" rel="noreferrer">
+                  Telegram-канале
+                </a>
+                .
+              </>
+            )
           ) : (
             <>
               {slides[i].label}. Включите фоновое видео через{" "}
